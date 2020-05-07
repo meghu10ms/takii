@@ -41,6 +41,22 @@ const MENUITEMS = [
       }
     ],
   }, {
+    label: 'User Operations',
+    main: [
+      {
+        state: 'user',
+        name: 'User Operations',
+        type: 'sub',
+        icon: 'ti-layers',
+        children: [
+          {
+            state: 'user-list',
+            name: 'User List'
+          }
+        ]
+      }
+    ]
+  }, {
     label: 'Admin',
     main: [
       {

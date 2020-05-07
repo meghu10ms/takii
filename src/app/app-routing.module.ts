@@ -23,13 +23,16 @@ const routes: Routes = [
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }, {
         path: 'user-profile',
-        loadChildren: () => import('./user/user-profile/user-profile.module').then(m => m.UserProfileModule)
+        loadChildren: () => import('./profile/user-profile/user-profile.module').then(m => m.UserProfileModule)
       }, {
         path: 'change-password',
-        loadChildren: () => import('./user/change-password/change-password.module').then(m => m.ChangePasswordModule)
+        loadChildren: () => import('./profile/change-password/change-password.module').then(m => m.ChangePasswordModule)
       }, {
         path: 'admin',
         loadChildren: () => import('./admin/permission/permission.module').then(m => m.PermissionModule)
+      }, {
+        path: 'user',
+        loadChildren: () => import('./users/user/user.module').then(m => m.UserModule)
       }
     ]
   },
