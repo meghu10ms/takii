@@ -1,0 +1,22 @@
+<app-card-event [title]="'Area Collection'">
+    <div class="row" >
+        <!-- counter-card-1 start-->
+        <div class="col-md-12 col-xl-4" *ngFor="let val of AreaCollection">
+          <app-cardsmall [title]=val.name [selValue]=val>
+            <div class="row">
+              <div class="col-5 counter-card-icon">
+                <p> lg :{{val.lt}}</p>
+                  <p>lt :{{val.lg}}</p>
+              </div>
+              <div class="col-7  text-right">
+                <div class="counter-card-text">
+                  <h3>{{val.code}}</h3>
+                  <p>{{val.area}}</p>
+                </div>
+              </div>
+            </div>
+          </app-cardsmall>
+        </div>
+        <!-- counter-card-1 end-->  
+      </div>
+    </app-card-event>

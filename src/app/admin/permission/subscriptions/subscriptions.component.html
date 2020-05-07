@@ -1,0 +1,69 @@
+<app-card-event [title]="'Subscriptions Collection'">
+  <div class="row">
+    <!-- counter-card-1 start-->
+    <div class="col-md-12 col-xl-6" *ngFor="let val of SubscriptionCollection">
+      <app-cardsmall [title]=val.code [selValue]=val>
+        <div class="row">
+          <div class="col-7 counter-card-icon">
+            <!-- <i class="icofont icofont-chart-histogram"></i> -->
+            <div class="row">
+              <div class="col-6">
+                <p><b>Durtion :</b>{{val.duration}} Days</p>
+                <p><b>Amount :</b>{{val.amount}} Rs</p>
+                <p><b>Offer Price/Cane :</b>{{val.offPricePerCane}} Rs</p>
+                <p><b>Max Cane : {{val.maxcane}}</b></p>
+              </div>
+              <div class="col-6">
+                <div class="media chat-messages">
+                  <a class="media-right photo-table1" href="javascript:;">
+                    <img class="media-object img-circle m-t-10" src="{{val.bannerImage}}"
+                      alt="Subscription placeholder image">
+                  </a>
+                </div>
+                <!-- <div class="form-group row"> -->
+                <!-- <label class="col-sm-2 col-form-label">Active</label> -->
+                <div class="col-sm-3">
+                  <label class="switch">
+                    <input type="checkbox" checked="{{val.active}}">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-5  text-right">
+            <div class="counter-card-text">
+              <h3>{{val.name}}</h3>
+
+              <p><b>Next Durtion :</b>{{val.nextduration}} Days</p>
+              <p><b>Next Amount :</b>{{val.nextamount}} Rs</p>
+              <p><b>Next Offer Price/Cane :</b>{{val.nextoffPricePerCane}} Rs</p>
+              <p><b>Next Max Cane :</b>{{val.nextmaxCane}}</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="counter-card-text">
+              <div class="row">
+                <div class="col-6">
+                  <p><b>Description :</b>{{val.description}}</p>
+                  <p><b>Next Description :</b>{{val.nextdescription}}</p>
+                </div>
+                <div class="col-6">
+                  <p><b>T & C :</b>{{val.termsAndCondition}}</p>
+                  <p><b>Next T & C :</b>{{val.nexttermsAndCondition}}</p>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </app-cardsmall>
+    </div>
+    <!-- counter-card-1 end-->
+  </div>
+</app-card-event>

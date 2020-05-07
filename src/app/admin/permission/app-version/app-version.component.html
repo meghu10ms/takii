@@ -1,0 +1,28 @@
+<app-card-event [title]="'App Versions Collection'">
+    <div class="row">
+        <div class="col-md-12 col-xl-4" *ngFor="let val of AppVersionCollection">
+            <app-cardsmall [title]=val.version [selValue]=val>
+                <div class="row">
+                    <div class="col-5 counter-card-icon">
+                        <div class="row">
+                            <div class="col-7"><b>Active:</b>
+                            </div>
+                            <div class="col-5">
+                                <label class="switch">
+                                    <input type="checkbox" checked="{{val.active}}" disabled>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7  text-right">
+                        <div class="counter-card-text">
+                            <h3>{{val.version}}</h3>
+                            <p>{{val.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </app-cardsmall>
+        </div>
+    </div>
+</app-card-event>

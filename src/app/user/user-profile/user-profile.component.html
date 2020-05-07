@@ -1,0 +1,76 @@
+<app-card [title]="'User Information'">
+    
+
+        <form [formGroup]="viewProfile">
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="First Name" formControlName="firstname" >
+                </div>
+             
+                <label class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Last Name" formControlName="lastname" >
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Account Number</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Account Number" formControlName="accountNumber" >
+                </div>
+              <!-- </div>
+
+              <div class="form-group row"> -->
+                <label class="col-sm-2 col-form-label">Account Type</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Account Type" formControlName="accountType" >
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bank Name</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Bank Name" formControlName="bankName" >
+                </div>
+              <!-- </div>
+
+              <div class="form-group row"> -->
+                <label class="col-sm-2 col-form-label">Phone Number</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Phone Number" formControlName="phone" >
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Email" formControlName="email" >
+                </div>
+              <!-- </div>
+
+              <div class="form-group row"> -->
+                <label class="col-sm-2 col-form-label">Account Holder Name</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Account Holder Name" formControlName="holderName" >
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Branch Name</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Account Holder Name" formControlName="branchName" >
+                </div>
+              <!-- </div>
+
+              <div class="form-group row"> -->
+                <label class="col-sm-2 col-form-label">Tax Number</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Tax Number" formControlName="taxNumber" >
+                </div>
+              </div>
+                        
+        </form>
+    
+</app-card>

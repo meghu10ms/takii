@@ -1,0 +1,55 @@
+<app-card [title]=formTitle>
+
+    <form [formGroup]="newUserForm">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Area Code</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="Enter Area Code" formControlName="code"
+                    maxlength="7" (keypress)="codeValidation($event)" (keyup)="upperCaseValue($event)"
+                    (change)="validCode($event)">
+                <div class="col-form-label">Ex : BNG0001, Must Starts With BNG</div>
+                <div class="col-form-label" style="color:red" *ngIf="codeErrorInd">Entered code is alredy created</div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Area Name</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="Enter Area Name" formControlName="area">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Langitude</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="Enter Langitude" formControlName="lt"
+                    maxlength="20" (keypress)="numberOnlyWithDot($event)">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Latitude</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="Enter Latitude" formControlName="lg" maxlength="20"
+                    (keypress)="numberOnlyWithDot($event)">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="Enter Address" formControlName="name">
+            </div>
+        </div>
+
+        <div class="form-group row pull-right">
+            <div class="text-right">
+                <button *ngIf="!editInd" class="btn btn-info btn-round btn-block" (click)="onPressAddArea()">Add New
+                    Area</button>
+                <button *ngIf="editInd" class="btn btn-info btn-round btn-block" (click)="onPressUpdateArea()">Update
+                    Area Info</button>
+            </div>
+        </div>
+    </form>
+</app-card>
+<ng2-toasty [position]="position"></ng2-toasty>

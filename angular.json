@@ -5,11 +5,7 @@
   "projects": {
     "takii": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -24,13 +20,26 @@
             "tsConfig": "tsconfig.app.json",
             "aot": false,
             "assets": [
-              "src/favicon.ico",
+              "src/water.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "node_modules/flag-icon-css/sass/flag-icon.scss",
+              "node_modules/ti-icons/css/themify-icons.css",
+              "node_modules/simple-line-icons/scss/simple-line-icons.scss",
+              "src/assets/icon/icofont/css/icofont.css",
+              "node_modules/font-awesome-scss/scss/font-awesome.scss",
+              "node_modules/ng2-toasty/style-bootstrap.css",
+              "node_modules/ng2-toasty/style-default.css",
+              "node_modules/ng2-toasty/style-material.css",
+              "src/assets/css/animate.scss",
+              "src/styles.scss",
+              "src/assets/css/custom.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -89,11 +98,11 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
+              "src/water.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -124,6 +133,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "takii"
 }

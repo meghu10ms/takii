@@ -1,0 +1,21 @@
+<app-card-event [title]="'Offers Collection'">
+<div class="row" >
+    <!-- counter-card-1 start-->
+    <div class="col-md-12 col-xl-4" *ngFor="let val of OfferCollection">
+      <app-cardsmall [title]=val.p2>
+        <div class="row">
+          <div class="col-6 counter-card-icon">
+            <i class="icofont icofont-chart-histogram"></i>
+          </div>
+          <div class="col-6  text-right">
+            <div class="counter-card-text">
+              <h3>{{val.p1}}</h3>
+              <p>{{val.p2}}</p>
+            </div>
+          </div>
+        </div>
+      </app-cardsmall>
+    </div>
+    <!-- counter-card-1 end-->  
+  </div>
+</app-card-event>

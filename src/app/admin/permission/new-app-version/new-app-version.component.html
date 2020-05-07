@@ -1,0 +1,40 @@
+<app-card [title]=formTitle>
+
+    <form [formGroup]="newAppVersionForm">
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">App Version</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" placeholder="Enter App Version" formControlName="version"
+                    (change)="validCode($event)">
+                <div class="col-form-label" style="color:red" *ngIf="codeErrorInd">Entered name is alredy created</div>
+            </div>
+            <label class="col-sm-2 col-form-label">Active</label>
+            <div class="col-sm-3">
+                <label class="switch">
+                    <input type="checkbox" formControlName="active">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <textarea rows="3" cols="4" class="form-control" formControlName="description"
+                    placeholder="Enter Description"></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group row pull-right">
+            <div class="text-right">
+                <button *ngIf="!editInd" class="btn btn-info btn-round btn-block" (click)="onPressAddAppVersion()">Add
+                    New App Version</button>
+                <button *ngIf="editInd" class="btn btn-info btn-round btn-block"
+                    (click)="onPressUpdateAppVersion()">Update App Version Info</button>
+            </div>
+        </div>
+    </form>
+</app-card>
+<ng2-toasty [position]="position"></ng2-toasty>

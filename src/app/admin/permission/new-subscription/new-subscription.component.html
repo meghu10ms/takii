@@ -1,0 +1,129 @@
+<app-card [title]=formTitle>
+
+    <form [formGroup]="newSubscriptionForm">
+        <div class="form-group row">
+            <div class="col-sm-4 top-card text-left">
+                <!-- <img src="assets/images/widget/user1.png" class="img-responsive" alt=""> -->
+                <div class="media chat-messages">
+                    <a class="media-right photo-table1" href="javascript:;">
+                        <img class="media-object img-circle m-t-10" [src]="imgURL" alt="Subscription placeholder image">
+                    </a>
+                </div>
+                <input type="file" #file accept='image/*' (change)="preview(file.files)">
+            </div>
+            <label class="col-sm-2 col-form-label">Subscription Code</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="code" (keyup)="upperCaseValue($event)"
+                    placeholder="Enter Subscription Code" (change)="validCode($event)">
+                <div class="col-form-label" style="color:red" *ngIf="codeErrorInd">Entered code is alredy created</div>
+            </div>
+            <div class="col-sm-2 text-right" *ngIf="editInd">
+                <label>Active</label>
+                <label class="switch">
+                    <input class="switch" type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Subscription Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="name" placeholder="Enter Subscription Name">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Duration</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="duration" placeholder="Enter Duration"
+                    maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+            <!-- </div>
+        <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Amount</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="amount" placeholder="Enter Amount"
+                    maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Offer Price/Cane</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="offPricePerCane"
+                    placeholder="Enter Offer Price/Cane" maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+            <!-- </div>
+        <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Max Cane</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="maxCane" placeholder="Enter Max Cane"
+                    maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="description" placeholder="Enter Description">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Terms And Condition</label>
+            <div class="col-sm-10">
+                <textarea rows="4" cols="5" class="form-control" formControlName="termsAndCondition"
+                    placeholder="Enter Terms And Condition"></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Next Duration</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="nextduration" placeholder="Next Enter Duration"
+                    maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+            <!-- </div>
+        <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Next Next Amount</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="nextamount" placeholder="Next Enter Amount"
+                    maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nex Offer Price Per Cane</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="nextoffPricePerCane"
+                    placeholder="Enter Next Offer Price Per Cane" maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+            <!-- </div>
+        <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Next Max Cane</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" formControlName="nextmaxCane" placeholder="Enter Next Max Cane"
+                    maxlength="7" (keypress)="numberOnlyWithDot($event)">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Next Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="nextdescription"
+                    placeholder="Enter Next Description">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Next Terms And Condition</label>
+            <div class="col-sm-10">
+                <textarea rows="4" cols="5" class="form-control" formControlName="nexttermsAndCondition"
+                    placeholder="Enter Next Terms And Condition"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row pull-right">
+            <div class="text-right">
+                <button *ngIf="!editInd" class="btn btn-info btn-round btn-block" (click)="onPressAddSubscription()">Add
+                    New Subscription</button>
+                <button *ngIf="editInd" class="btn btn-info btn-round btn-block"
+                    (click)="onPressUpdateSubscription()">Update Subscription Info</button>
+            </div>
+        </div>
+    </form>
+</app-card>
+<ng2-toasty [position]="position"></ng2-toasty>
