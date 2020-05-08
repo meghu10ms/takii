@@ -20,13 +20,7 @@ export class UserProfileComponent implements OnInit {
       lastname: [{ value: '', disabled: true }, Validators.required],
       phone: [{ value: '', disabled: true }, Validators.required],
       email: [{ value: '', disabled: true }, Validators.required],
-      accountNumber: [{ value: '', disabled: true }, Validators.required],
-      accountType: [{ value: '', disabled: true }, Validators.required],
-      bankName: [{ value: '', disabled: true }, Validators.required],
-      branchName: [{ value: '', disabled: true }, Validators.required],
-      holderName: [{ value: '', disabled: true }, Validators.required],
-      ifscCode: [{ value: '', disabled: true }, Validators.required],
-      taxNumber: [{ value: '', disabled: true }, Validators.required]
+      
     })
 
     this.bindDisplayValues(this.cds.currentUserDetail);

@@ -11,7 +11,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'user-list',
-                loadChildren: () => import('./user-list/user-list-module').then(m => m.UserListModule)
+                loadChildren: () => import('./user-list/user-list.module').then(m => m.UserListModule)
             },
             //   {
             //     path: 'new-ads',
