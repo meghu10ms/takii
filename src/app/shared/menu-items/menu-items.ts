@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CommonServiceService } from '../../common-service.service';
 
 export interface BadgeItem {
   type: string;
@@ -52,6 +53,9 @@ const MENUITEMS = [
           {
             state: 'user-list',
             name: 'User List'
+          }, {
+            state: 'add-user',
+            name: 'User Registration'
           }
         ]
       }
@@ -99,10 +103,86 @@ const MENUITEMS = [
   },
 ];
 
+const MENUITEMSNONSUPERADMIN = [
+  {
+    label: 'Dashboard',
+    main: [
+      {
+        state: 'dashboard',
+        name: 'Dashboard',
+        type: 'link',
+        icon: 'ti-home'
+      }
+    ],
+  }, {
+    label: 'User Operations',
+    main: [
+      {
+        state: 'user',
+        name: 'User Operations',
+        type: 'sub',
+        icon: 'ti-layers',
+        children: [
+          {
+            state: 'user-list',
+            name: 'User List'
+          }, {
+            state: 'add-user',
+            name: 'User Registration'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+const MENUITEMSWITHOUTADDOPERATION = [
+  {
+    label: 'Dashboard',
+    main: [
+      {
+        state: 'dashboard',
+        name: 'Dashboard',
+        type: 'link',
+        icon: 'ti-home'
+      }
+    ],
+  }, {
+    label: 'User Operations',
+    main: [
+      {
+        state: 'user',
+        name: 'User Operations',
+        type: 'sub',
+        icon: 'ti-layers',
+        children: [
+          {
+            state: 'user-list',
+            name: 'User List'
+          }
+        ]
+      }
+    ]
+  }
+];
+
 @Injectable()
 export class MenuItems {
+  constructor(private cds: CommonServiceService) { }
   getAll(): Menu[] {
-    return MENUITEMS;
+    //debugger;
+    var MENU = [];
+    var superAdmin = this.cds.currentUserDetail.isSuperAdmin ? this.cds.currentUserDetail.isSuperAdmin : false;
+    if (superAdmin)
+      MENU = MENUITEMS;
+    else {
+      if (this.cds.canAdd)
+        MENU = MENUITEMSNONSUPERADMIN;
+      else
+        MENU = MENUITEMSWITHOUTADDOPERATION;
+    }
+
+    return MENU;
   }
 
   /*add(menu: Menu) {

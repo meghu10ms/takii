@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonServiceService } from '../../../common-service.service';
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-area',
@@ -25,6 +26,7 @@ export class NewAreaComponent implements OnInit {
 
   constructor(
     private cds: CommonServiceService,
+    private router: Router,
     private toastyService: ToastyService,
     private fb: FormBuilder
   ) { }
@@ -100,8 +102,8 @@ export class NewAreaComponent implements OnInit {
         if (enterdValue === areasCollection[i].areaCode) {
           this.codeErrorInd = true;
           return;
-        }else
-        this.codeErrorInd = false;
+        } else
+          this.codeErrorInd = false;
       }
     }, error => {
       var msg = error.error.message ? error.error.message : error.message
@@ -139,6 +141,7 @@ export class NewAreaComponent implements OnInit {
 
       this.cds.postAreaDetails(bodyData, this.cds.tokenLogin).subscribe(response => {
         this.addToast({ title: 'Success', msg: response["message"], timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'success' });
+        this.router.navigate(['/admin/area']);
       }, error => {
         var msg = error.error.message ? error.error.message : error.message;
         this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
@@ -148,7 +151,7 @@ export class NewAreaComponent implements OnInit {
       for (let name in this.newUserForm.controls) {
         if (this.newUserForm.controls[name].validator && this.newUserForm.controls[name].value == '' || this.newUserForm.controls[name].value == null) {
           this.newUserForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name +" is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newUserForm.controls[name].setErrors(null);
@@ -179,7 +182,7 @@ export class NewAreaComponent implements OnInit {
       for (let name in this.newUserForm.controls) {
         if (this.newUserForm.controls[name].validator && this.newUserForm.controls[name].value == '' || this.newUserForm.controls[name].value == null) {
           this.newUserForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name +" is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newUserForm.controls[name].setErrors(null);

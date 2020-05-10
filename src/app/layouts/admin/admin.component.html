@@ -37,15 +37,15 @@
 
 
               <li class="user-profile header-notification">
-                <a >
-                  <img src="assets/images/user.png" alt="User-Profile-Image">
+                <a>
+                  <img src="{{profilePictureUrl}}" alt="User-Profile-Image">
                   <span>{{this.profileName}}</span>
                   <i class="ti-angle-down"></i>
                 </a>
                 <ul class="show-notification profile-notification">
 
-                  <li>
-                    <a [routerLink]="['/user-profile']">
+                  <li *ngIf="!isSupAdmin">
+                    <a href="javascript:void(0)" (click)="onProfile()">
                       <i class="ti-user"></i> Profile
                     </a>
                   </li>
@@ -68,7 +68,7 @@
       </div>
     </nav>
 
-   
+
     <div class="pcoded-main-container" style="margin-top: 56px;">
       <div class="pcoded-wrapper">
         <nav id="main_navbar" class=" pcoded-navbar" (clickOutside)="onClickedOutside($event)"

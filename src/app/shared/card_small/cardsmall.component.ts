@@ -3,6 +3,7 @@ import { cardToggle, cardClose } from './card-animation';
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
 import { CommonServiceService } from '../../common-service.service';
 import { Router } from '@angular/router';
+import { ConfirmationDialogService } from '../../shared/confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-cardsmall',
@@ -36,7 +37,8 @@ export class CardsmallComponent implements OnInit {
   constructor(
     public router: Router,
     private toastyService: ToastyService,
-    private cds: CommonServiceService) {
+    private cds: CommonServiceService,
+    private cnfr: ConfirmationDialogService) {
     this.fullCardIcon = 'fa-expand';
   }
 
@@ -48,16 +50,23 @@ export class CardsmallComponent implements OnInit {
   }
 
   closeCard() {
-    if (this.selValue.deleteIndicator === "Area")
-      this.deleteArea(this.selValue);
-    else if (this.selValue.deleteIndicator === "Permission")
-      this.deletePermmission(this.selValue);
-    else if (this.selValue.deleteIndicator === "Role")
-      this.deleteRole(this.selValue);
-    else if (this.selValue.deleteIndicator === "App Version")
-      this.deleteAppVersion(this.selValue);
-    else if (this.selValue.deleteIndicator === "Subscription")
-      this.deleteSubscription(this.selValue);
+    this.cnfr.confirm('Please confirm..', 'Do you really want to ... ?')
+      .then((confirmed) => {
+        if (confirmed) {
+          if (this.selValue.deleteIndicator === "Area")
+            this.deleteArea(this.selValue);
+          else if (this.selValue.deleteIndicator === "Permission")
+            this.deletePermmission(this.selValue);
+          else if (this.selValue.deleteIndicator === "Role")
+            this.deleteRole(this.selValue);
+          else if (this.selValue.deleteIndicator === "App Version")
+            this.deleteAppVersion(this.selValue);
+          else if (this.selValue.deleteIndicator === "Subscription")
+            this.deleteSubscription(this.selValue);
+        }
+      })
+      .catch(() => {
+      });
   }
   editCard() {
     if (this.selValue.deleteIndicator === "Area") {

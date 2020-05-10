@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonServiceService } from '../../../common-service.service';
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-subscription',
@@ -26,6 +27,7 @@ export class NewSubscriptionComponent implements OnInit {
 
   constructor(
     private cds: CommonServiceService,
+    private router: Router,
     private toastyService: ToastyService,
     private fb: FormBuilder
   ) { }
@@ -158,6 +160,7 @@ export class NewSubscriptionComponent implements OnInit {
 
       this.cds.postSubscription(bodyData, this.cds.tokenLogin).subscribe(response => {
         this.addToast({ title: 'Success', msg: response["message"], timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'success' });
+        this.router.navigate(['/admin/subscriptions']);
       }, error => {
         var msg = error.error.message ? error.error.message : error.message;
         this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
@@ -167,7 +170,7 @@ export class NewSubscriptionComponent implements OnInit {
       for (let name in this.newSubscriptionForm.controls) {
         if (this.newSubscriptionForm.controls[name].validator && this.newSubscriptionForm.controls[name].value == '' || this.newSubscriptionForm.controls[name].value == null) {
           this.newSubscriptionForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name +" is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newSubscriptionForm.controls[name].setErrors(null);
@@ -207,7 +210,7 @@ export class NewSubscriptionComponent implements OnInit {
       for (let name in this.newSubscriptionForm.controls) {
         if (this.newSubscriptionForm.controls[name].validator && this.newSubscriptionForm.controls[name].value == '' || this.newSubscriptionForm.controls[name].value == null) {
           this.newSubscriptionForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name +" is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newSubscriptionForm.controls[name].setErrors(null);

@@ -28,6 +28,14 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { NotificationsService } from 'angular2-notifications';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
+import {
+  MatInputModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSelectModule
+} from '@angular/material';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,6 +54,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk' }),
     ClickOutsideModule,
     PerfectScrollbarModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule
   ],
   declarations: [
     AccordionAnchorDirective,
@@ -64,9 +76,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SpinnerComponent,
     ModalAnimationComponent,
     ModalBasicComponent,
-    DataFilterPipe
+    DataFilterPipe,
+    ConfirmationDialogComponent
   ],
   exports: [
+    ConfirmationDialogComponent,
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
@@ -93,11 +107,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ScrollToModule,
     AgmCoreModule,
     ClickOutsideModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule
   ],
+  entryComponents: [ConfirmationDialogComponent],
   providers: [
     MenuItems,
     TodoService,
+    ConfirmationDialogService,
     NotificationsService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonServiceService } from '../../../common-service.service';
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-permis',
@@ -25,6 +26,7 @@ export class NewPermisComponent implements OnInit {
 
   constructor(
     private cds: CommonServiceService,
+    private router: Router,
     private toastyService: ToastyService,
     private fb: FormBuilder
   ) { }
@@ -113,6 +115,7 @@ export class NewPermisComponent implements OnInit {
 
       this.cds.postPermission(bodyData, this.cds.tokenLogin).subscribe(response => {
         this.addToast({ title: 'Success', msg: response["message"], timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'success' });
+        this.router.navigate(['/admin/permis']);
       }, error => {
         var msg = error.error.message ? error.error.message : error.message;
         this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
@@ -122,7 +125,7 @@ export class NewPermisComponent implements OnInit {
       for (let name in this.newPermissionForm.controls) {
         if (this.newPermissionForm.controls[name].validator && this.newPermissionForm.controls[name].value == '' || this.newPermissionForm.controls[name].value == null) {
           this.newPermissionForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name +" is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newPermissionForm.controls[name].setErrors(null);
@@ -156,7 +159,7 @@ export class NewPermisComponent implements OnInit {
       for (let name in this.newPermissionForm.controls) {
         if (this.newPermissionForm.controls[name].validator && this.newPermissionForm.controls[name].value == '' || this.newPermissionForm.controls[name].value == null) {
           this.newPermissionForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name +" is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newPermissionForm.controls[name].setErrors(null);

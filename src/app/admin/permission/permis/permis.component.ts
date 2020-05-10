@@ -8,6 +8,7 @@ import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
   styleUrls: ['./permis.component.css']
 })
 export class PermisComponent implements OnInit {
+  isBusy = false;
   PermissionCollection: any;
 
   position = 'bottom-right';
@@ -22,14 +23,17 @@ export class PermisComponent implements OnInit {
     private cds: CommonServiceService,
     private toastyService: ToastyService
   ) { }
- 
+
   ngOnInit() {
     this.getDeatails();
   }
   getDeatails() {
+    this.isBusy = true;
     this.cds.getAllPermissions(this.cds.tokenLogin).subscribe(response => {
+      this.isBusy = false;
       this.PermissionCollection = this.getTableData(response["permission"]);
     }, error => {
+      this.isBusy = false;
       var msg = error.error.message ? error.error.message : error.message
       this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
     })

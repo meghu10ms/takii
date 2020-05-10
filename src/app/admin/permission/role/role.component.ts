@@ -8,6 +8,7 @@ import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
   styleUrls: ['./role.component.css']
 })
 export class RoleComponent implements OnInit {
+  isBusy = false;
   RolesCollection: any;
 
   position = 'bottom-right';
@@ -28,9 +29,12 @@ export class RoleComponent implements OnInit {
     this.getDeatails();
   }
   getDeatails() {
+    this.isBusy = true;
     this.cds.getAllRoles(this.cds.tokenLogin).subscribe(response => {
+      this.isBusy = false;
       this.RolesCollection = this.getTableData(response["roles"]);
     }, error => {
+      this.isBusy = false;
       var msg = error.error.message ? error.error.message : error.message
       this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
     })

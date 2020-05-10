@@ -50,6 +50,9 @@ import { CommonServiceService } from '../../common-service.service';
   ]
 })
 export class AdminComponent implements OnInit {
+  isSupAdmin = false;
+  profilePictureUrl: any;
+
   deviceType = 'desktop';
   verticalNavType = 'expanded';
   verticalEffect = 'shrink';
@@ -85,8 +88,14 @@ export class AdminComponent implements OnInit {
       this.router.navigate(['/']);
     } else {
       var selectedAdmin = this.cds.currentUserDetail.name;
-      this.profileName = selectedAdmin.title ? selectedAdmin.title : "" + " " + selectedAdmin.firstName ? selectedAdmin.firstName : "" + " " + selectedAdmin.lastName ? selectedAdmin.lastName : "";
-
+      this.profilePictureUrl = this.cds.currentUserDetail.profilePicture ? this.cds.currentUserDetail.profilePicture : "assets/images/user.png"
+      this.profileName = (selectedAdmin.title ? selectedAdmin.title : "") + " " + (selectedAdmin.firstName ? selectedAdmin.firstName : "") + " " + (selectedAdmin.lastName ? selectedAdmin.lastName : "");
+      var sp = selectedAdmin.isSuperAdmin ? selectedAdmin.isSuperAdmin : false;
+      if (sp) {
+        this.isSupAdmin = true;
+      } else {
+        this.isSupAdmin = false;
+      }
     }
   }
 
@@ -129,31 +138,6 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  searchFriendList(event) {
-    const search = (this.search_friends.nativeElement.value).toLowerCase();
-    let search_input: string;
-    let search_parent: any;
-    const friendList = document.querySelectorAll('.userlist-box .media-body .chat-header');
-    Array.prototype.forEach.call(friendList, function (elements, index) {
-      search_input = (elements.innerHTML).toLowerCase();
-      search_parent = (elements.parentNode).parentNode;
-      if (search_input.indexOf(search) !== -1) {
-        search_parent.classList.add('show');
-        search_parent.classList.remove('hide');
-      } else {
-        search_parent.classList.add('hide');
-        search_parent.classList.remove('show');
-      }
-    });
-  }
-
-  toggleChat() {
-    this.chatToggle = this.chatToggle === 'out' ? 'in' : 'out';
-  }
-
-  toggleChatInner() {
-    this.chatInnerToggle = this.chatInnerToggle === 'off' ? 'on' : 'off';
-  }
 
   toggleOpened() {
     if (this.windowWidth < 768) {
@@ -173,6 +157,11 @@ export class AdminComponent implements OnInit {
 
   onPressLogout() {
     this.router.navigate(['/']);
+  }
+
+  onProfile() {
+    this.cds.viewProfileId = undefined;
+    this.router.navigate(['/user-profile']);
   }
 
 }

@@ -1,69 +1,56 @@
+<div class="container overlay" *ngIf="isBusy">
+  <div class="spinner">
+      <div class="spinner-grow text-muted"></div>
+      <div class="spinner-grow text-primary"></div>
+      <div class="spinner-grow text-success"></div>
+      <div class="spinner-grow text-info"></div>
+      <div class="spinner-grow text-warning"></div>
+      <div class="spinner-grow text-danger"></div>
+      <div class="spinner-grow text-secondary"></div>
+      <div class="spinner-grow text-dark"></div>
+      <div class="spinner-grow text-light"></div>
+  </div>
+</div>
 <app-card [title]="'User Information'">
-  <form [formGroup]="viewProfile">
-    <div class="main-body user-profile">
-      <div class="page-wrapper">
-        <div class="page-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="cover-profile">
-                <div class="profile-bg-img">
-                  <div class="card-block user-info">
-                    <div class="col-md-12">
-                      <div class="media-left">
-                        <a href="#" class="profile-image">
-                          <img class="user-img img-circle" src="assets/images/user.png" style="height: 150px;"
-                            alt="user-img">
-                        </a>
-                      </div>
-                      <div class="media-body row">
-                        <div class="col-lg-12">
-                          <div class="user-title">
-                            <h1>Josephin Villa</h1>
-                            <span>Super Admin</span>
-                          </div>
-                        </div>
-                      </div>
+  <!-- <form > -->
+  <div class="main-body user-profile">
+    <div class="page-wrapper">
+      <div class="page-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="cover-profile">
+              <div class="profile-bg-img">
+                <div class="card-block user-info">
+                  <div class="col-md-12">
+                    <div class="media-left">
+                      <a href="#" class="profile-image">
+                        <img class="user-img img-circle" src="{{userDetails.profilePicture}}" style="height: 140px;"
+                          alt="user-img">
+                      </a>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="tab-content">
-                <div class="tab-pane active" id="personal" role="tabpanel">
-                  <div class="card">
-                    <div class="card-header">
-                      <h5 class="card-header-text"></h5>
-                    </div>
-                    <div class="card-block">
-
-                      <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">First Name</label>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control" placeholder="First Name" formControlName="firstname">
-                        </div>
-
-                        <label class="col-sm-2 col-form-label">Last Name</label>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control" placeholder="Last Name" formControlName="lastname">
+                    <div class="media-body row">
+                      <div class="col-lg-12">
+                        <div class="user-title">
+                          <h1>{{userDetails.title}} {{userDetails.firstName}} {{userDetails.lastName}}</h1>
+                          <span>{{userDetails.roleName}}</span>
+                          <br /><br />
+                          <label class="switch">
+                            <input type="checkbox" disabled checked="{{userDetails.isActive}}">
+                            <span class="slider round"></span>
+                          </label>
                         </div>
                       </div>
-
-                      <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control" placeholder="Email" formControlName="email">
-                        </div>
-
-                        <label class="col-sm-2 col-form-label">Phone Number</label>
-                        <div class="col-sm-4">
-                          <input type="text" class="form-control" placeholder="Phone Number" formControlName="phone">
+                      <div>
+                        <div class="pull-right cover-btn">
+                          <button type="button" *ngIf="!isProfileView && isDeletePermission" (click)="onPressEditUser(userDetails)" class="btn btn-primary m-b-5"><i
+                              class="icofont icofont-edit"></i>
+                            Edit</button>
+                            &nbsp;
+                          <button type="button" *ngIf="!isProfileView && isEditPermission" (click)="onPressDeleteUser(userDetails)"
+                            class="btn btn-danger m-b-5"><i class="icofont icofont-delete"></i>
+                            Delete</button>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -71,7 +58,129 @@
             </div>
           </div>
         </div>
+
+        <app-card [title]="'Basic Information'">
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control"> -->
+              <p>{{userDetails.title}}</p>
+            </div>
+
+            <label class=" col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="First Name"> -->
+              <p>{{userDetails.firstName}}</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-8">
+              <!-- <input type="text" class="form-control" placeholder="Last Name"> -->
+              <p>{{userDetails.lastName}}</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Email"> -->
+              <p>{{userDetails.email}}</p>
+            </div>
+            <!-- </div>
+
+            <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Phone Number</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Phone Number"> -->
+              <p>{{userDetails.phone}}</p>
+            </div>
+          </div>
+
+        </app-card>
+        <app-card [title]="'Area Information'">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Area Code</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Area Code"> -->
+              <p>{{userDetails.areaCode}}</p>
+            </div>
+            <!-- </div>
+
+            <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Area Name</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Area Name"> -->
+              <p> {{userDetails.areaName}}</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Area Address</label>
+            <div class="col-sm-10">
+              <!-- <input type="text" class="form-control" placeholder="Area Address"> -->
+              <p>{{userDetails.areaAddress}}</p>
+            </div>
+          </div>
+
+        </app-card>
+        <app-card [title]="'Role Information'">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Role Name</label>
+            <div class="col-sm-3">
+              <!-- <input type="text" class="form-control" placeholder="Role Name"> -->
+              <p>{{userDetails.roleName}}</p>
+            </div>
+            <!-- </div>
+
+            <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Role Description</label>
+            <div class="col-sm-5">
+              <!-- <textarea rows="2" cols="4" class="form-control" placeholder="Role Description"></textarea> -->
+              <p>{{userDetails.roleDescription}}</p>
+            </div>
+          </div>
+        </app-card>
+        <app-card [title]="'Other Information'">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Area Admin Name</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Area Admin"> -->
+              <p>{{userDetails.areaAdminName}}</p>
+            </div>
+            <!-- </div>
+
+          <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Area Admin Email</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Area Admin"> -->
+              <p>{{userDetails.areaAdminEmail}}</p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Supervisor Name</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Area Admin"> -->
+              <p>{{userDetails.superviserName}}</p>
+            </div>
+            <!-- </div>
+
+          <div class="form-group row"> -->
+            <label class="col-sm-2 col-form-label">Supervisor Email</label>
+            <div class="col-sm-4">
+              <!-- <input type="text" class="form-control" placeholder="Supervisor"> -->
+              <p>{{userDetails.superviserEmail}}</p>
+            </div>
+          </div>
+        </app-card>
+
       </div>
     </div>
-  </form>
+  </div>
+
+  <!-- </form> -->
 </app-card>
+<ng2-toasty [position]="position"></ng2-toasty>

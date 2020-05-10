@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./offers.component.css']
 })
 export class OffersComponent implements OnInit {
+  isBusy = true;
   OfferCollection:any;
   constructor() { }
 

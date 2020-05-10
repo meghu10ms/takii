@@ -8,6 +8,7 @@ import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
   styleUrls: ['./app-version.component.css']
 })
 export class AppVersionComponent implements OnInit {
+  isBusy = false;
   AppVersionCollection: any;
 
   position = 'bottom-right';
@@ -29,9 +30,12 @@ export class AppVersionComponent implements OnInit {
   }
 
   getDeatails() {
+    this.isBusy = true;
     this.cds.getAllAppVersions(this.cds.tokenLogin).subscribe(response => {
+      this.isBusy = false;
       this.AppVersionCollection = this.getTableData(response["appVersions"]);
     }, error => {
+      this.isBusy = false;
       var msg = error.error.message ? error.error.message : error.message
       this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
     })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonServiceService } from '../../../common-service.service';
 import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-role',
@@ -26,6 +27,7 @@ export class NewRoleComponent implements OnInit {
 
   constructor(
     private cds: CommonServiceService,
+    private router: Router,
     private toastyService: ToastyService,
     private fb: FormBuilder
   ) { }
@@ -133,6 +135,7 @@ export class NewRoleComponent implements OnInit {
 
       this.cds.postRole(bodyData, this.cds.tokenLogin).subscribe(response => {
         this.addToast({ title: 'Success', msg: response["message"], timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'success' });
+        this.router.navigate(['/admin/role']);
       }, error => {
         var msg = error.error.message ? error.error.message : error.message;
         this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
@@ -142,7 +145,7 @@ export class NewRoleComponent implements OnInit {
       for (let name in this.newRoleForm.controls) {
         if (this.newRoleForm.controls[name].value == '' || this.newRoleForm.controls[name].value == null) {
           this.newRoleForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name + " is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newRoleForm.controls[name].setErrors(null);
@@ -173,7 +176,7 @@ export class NewRoleComponent implements OnInit {
       for (let name in this.newRoleForm.controls) {
         if (this.newRoleForm.controls[name].value == '' || this.newRoleForm.controls[name].value == null) {
           this.newRoleForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name + " is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newRoleForm.controls[name].setErrors(null);

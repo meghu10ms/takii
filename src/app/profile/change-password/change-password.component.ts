@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
+  isBusy = false;
   position = 'bottom-right';
   title: string;
   msg: string;
@@ -70,10 +71,12 @@ export class ChangePasswordComponent implements OnInit {
       "currentPassword": this.changePass.value.oldPassword,
       "newPassword": this.changePass.value.newPassword
     }
-
+    this.isBusy = true;
     this.cds.changePassword(this.cds.tokenLogin, data).subscribe(response => {
+      this.isBusy = false;
       this.addToast({ title: 'Success', msg: response["message"], timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'success' });
     }, error => {
+      this.isBusy = false;
       this.addToast({ title: 'Error', msg: error.error.error.message, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
     });
 

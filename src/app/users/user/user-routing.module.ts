@@ -12,11 +12,13 @@ const routes: Routes = [
             {
                 path: 'user-list',
                 loadChildren: () => import('./user-list/user-list.module').then(m => m.UserListModule)
-            },
-            //   {
-            //     path: 'new-ads',
-            //     loadChildren: () => import('./new-ads/new-ads.module').then(m => m.NewAdsModule)
-            //   }
+            }, {
+                path: 'view-user',
+                loadChildren: () => import('../../profile/user-profile/user-profile.module').then(m => m.UserProfileModule)
+            }, {
+                path: 'add-user',
+                loadChildren: () => import('./add-user/add-user.module').then(m => m.AddUserModule)
+            }
         ]
     }
 ];

@@ -1,3 +1,16 @@
+<div class="container overlay" *ngIf="isBusy">
+  <div class="spinner">
+      <div class="spinner-grow text-muted"></div>
+      <div class="spinner-grow text-primary"></div>
+      <div class="spinner-grow text-success"></div>
+      <div class="spinner-grow text-info"></div>
+      <div class="spinner-grow text-warning"></div>
+      <div class="spinner-grow text-danger"></div>
+      <div class="spinner-grow text-secondary"></div>
+      <div class="spinner-grow text-dark"></div>
+      <div class="spinner-grow text-light"></div>
+  </div>
+</div>
 <section class="login p-fixed d-flex text-center bg-primary common-img-bg">
   <div class="auth-fluid">
     <div class="row">
@@ -13,7 +26,7 @@
                   <h3 class="text-left txt-primary">Sign In</h3>
                 </div>
               </div>
-              <hr/>
+              <hr />
               <div class="input-group">
                 <input type="email" class="form-control" placeholder="Your Email Address" formControlName="email">
                 <span class="md-line"></span>
@@ -36,13 +49,15 @@
                   <a [routerLink]="['/auth/forgot']" class="text-right f-w-600"> Forgot Your Password?</a>
                 </div>
               </div>
+
               <div class="row m-t-30">
                 <div class="col-md-12">
-                  <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" (click)="onPressSignIn()">Sign in</button>
+                  <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"
+                    (click)="onPressSignIn()">Sign in</button>
                 </div>
               </div>
-              <hr/>
-             
+              <hr />
+
             </div>
           </form>
         </div>

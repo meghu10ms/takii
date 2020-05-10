@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./basic-login.component.scss']
 })
 export class BasicLoginComponent implements OnInit {
+  isBusy = false;
   position = 'bottom-right';
   title: string;
   msg: string;
@@ -68,16 +69,27 @@ export class BasicLoginComponent implements OnInit {
     if (this.loginForm.valid) {
       var values = this.loginForm.value;
       var enteredData = { "email": values.email, "password": values.password }
+      this.isBusy = true;
       this.cds.getLogin(enteredData).subscribe(response => {
+        //this.isBusy = false;
         this.cds.tokenLogin = response["token"];
         this.cds.getCurentUserDetails(response["token"]).subscribe(response => {
+          this.isBusy = false;
           this.cds.currentUserDetail = JSON.parse(JSON.stringify(response));
+          var role = this.cds.currentUserDetail.role ? this.cds.currentUserDetail.role : "";
+          var permission = role.permissions ? role.permissions[0] : "";
+          this.cds.canAdd = permission.add ? permission.add : false;
+          this.cds.canEdit = permission.edit ? permission.edit : false;
+          this.cds.canDelete = permission.delete ? permission.delete : false;
+          this.cds.canView = permission.view ? permission.view : false;
           this.router.navigate(['/dashboard']);
         }, error => {
+          this.isBusy = false;
           this.cds.tokenLogin = undefined;
           this.addToast({ title: 'Error', msg: error['error'].message, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         })
       }, error => {
+        this.isBusy = false;
         this.addToast({ title: 'Error', msg: error['error'].message, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
       })
     } else {

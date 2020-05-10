@@ -104,7 +104,7 @@ export class NewAppVersionComponent implements OnInit {
       for (let name in this.newAppVersionForm.controls) {
         if (this.newAppVersionForm.controls[name].value == '' || this.newAppVersionForm.controls[name].value == null) {
           this.newAppVersionForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name + " is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newAppVersionForm.controls[name].setErrors(null);
@@ -131,7 +131,7 @@ export class NewAppVersionComponent implements OnInit {
       for (let name in this.newAppVersionForm.controls) {
         if (this.newAppVersionForm.controls[name].value == '' || this.newAppVersionForm.controls[name].value == null) {
           this.newAppVersionForm.controls[name].markAsTouched();
-          this.addToast({ title: 'Error', msg: "Please Enter All values", timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
+          this.addToast({ title: 'Error', msg: (name + " is Invalid"), timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
         }
         else
           this.newAppVersionForm.controls[name].setErrors(null);

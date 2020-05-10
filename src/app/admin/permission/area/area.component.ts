@@ -8,8 +8,9 @@ import { ToastData, ToastOptions, ToastyService } from 'ng2-toasty';
   styleUrls: ['./area.component.css']
 })
 export class AreaComponent implements OnInit {
+  isBusy = false;
   AreaCollection: any;
-  
+
   position = 'bottom-right';
   title: string;
   msg: string;
@@ -18,7 +19,7 @@ export class AreaComponent implements OnInit {
   theme = 'bootstrap';
   type = 'default';
   closeOther = false;
-  
+
   constructor(
     private cds: CommonServiceService,
     private toastyService: ToastyService
@@ -28,9 +29,12 @@ export class AreaComponent implements OnInit {
     this.getDeatails();
   }
   getDeatails() {
+    this.isBusy = true;
     this.cds.getAllAraeDetails(this.cds.tokenLogin).subscribe(response => {
+      this.isBusy = false;
       this.AreaCollection = this.getTableData(response["areas"]);
     }, error => {
+      this.isBusy = false;
       var msg = error.error.message ? error.error.message : error.message
       this.addToast({ title: 'Error', msg: msg, timeout: 5000, theme: 'bootstrap', position: 'bottom-center', type: 'error' });
     })

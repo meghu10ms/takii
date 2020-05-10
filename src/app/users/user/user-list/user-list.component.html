@@ -1,159 +1,87 @@
+<div class="container overlay" *ngIf="isBusy">
+    <div class="spinner">
+        <div class="spinner-grow text-muted"></div>
+        <div class="spinner-grow text-primary"></div>
+        <div class="spinner-grow text-success"></div>
+        <div class="spinner-grow text-info"></div>
+        <div class="spinner-grow text-warning"></div>
+        <div class="spinner-grow text-danger"></div>
+        <div class="spinner-grow text-secondary"></div>
+        <div class="spinner-grow text-dark"></div>
+        <div class="spinner-grow text-light"></div>
+    </div>
+</div>
 <div class="col-md-12">
     <div class="card">
-        <div class="card-body">
-            <h5>Reset Order</h5>
-        </div>
-        <div class="card-body reset-table p-t-0">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr class="text-uppercase">
+        <!-- <div class="card-body">
+            <h5>Users List</h5>
+           
+        </div> -->
+        <div class="card-body reset-table p-t-0" style="padding: 0px;">
+            <mat-form-field class="f-right">
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search Option">
+            </mat-form-field>
+            <div class="table-responsive" style="overflow: auto;height: 25rem;">
 
-                            <th>Product Name</th>
-                            <th>Product Code</th>
-                            <th>Status</th>
-                            <th>Purchased on</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-success btn-round">Pending</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                <table mat-table matSort [dataSource]="dataSource" class="table">
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-primary btn-round">Process</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                    <ng-container matColumnDef="name">
+                        <th class="text-uppercase" mat-header-cell *matHeaderCellDef mat-sort-header><b> Name</b> </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-warning btn-round">Failed</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                    <ng-container matColumnDef="email">
+                        <th class="text-uppercase" mat-header-cell *matHeaderCellDef mat-sort-header><b> Email</b> </th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-primary btn-round">Process</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                    <ng-container matColumnDef="phone">
+                        <th class="text-uppercase" mat-header-cell *matHeaderCellDef mat-sort-header><b> Phone
+                                Number</b>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                    </ng-container>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-success btn-round">Pending</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                    <ng-container matColumnDef="active">
+                        <th class="text-uppercase" mat-header-cell *matHeaderCellDef mat-sort-header><b> Active </b>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button type="button" *ngIf="!element.active" class="btn btn-warning btn-round">No</button>
+                            <button type="button" *ngIf="element.active" class="btn btn-primary btn-round">Yes</button>
+                        </td>
+                    </ng-container>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-primary btn-round">Process</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                    <ng-container matColumnDef="area">
+                        <th class="text-uppercase" mat-header-cell *matHeaderCellDef mat-sort-header><b> Area </b>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.area}} </td>
+                    </ng-container>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-warning btn-round">Failed</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                    <ng-container matColumnDef="role">
+                        <th class="text-uppercase" mat-header-cell *matHeaderCellDef mat-sort-header><b> Role </b>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+                    </ng-container>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-primary btn-round">Process</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
+                    <ng-container matColumnDef="actions">
+                        <th class="text-uppercase" mat-header-cell *matHeaderCellDef><b> Action </b>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button *ngIf="isViewPermission" type="button"
+                                class="btn btn-success btn-round btn-outline-success"
+                                (click)="viewUser(element)">View</button>
+                        </td>
+                    </ng-container>
 
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-success btn-round">Pending</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
-
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-primary btn-round">Process</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
-
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-warning btn-round">Failed</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                        <tr>
-
-                            <td>Leisure Suit Casual</td>
-                            <td>3BSD59</td>
-                            <td><button type="button" class="btn btn-primary btn-round">Process</button></td>
-                            <td>27 Sep 2015</td>
-                            <td>$99.00</td>
-                            <td>2</td>
-                            <td><button type="button"
-                                    class="btn btn-success btn-round btn-outline-success">View</button></td>
-                        </tr>
-                    </tbody>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+
+                <mat-paginator [pageSizeOptions]="[6, 10, 15]" showFirstLastButtons></mat-paginator>
             </div>
         </div>
     </div>
 </div>
+<ng2-toasty [position]="position"></ng2-toasty>

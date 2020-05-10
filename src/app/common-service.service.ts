@@ -9,6 +9,9 @@ export class CommonServiceService {
 
   constructor(private http: HttpClient) { }
   tokenLogin: any;
+  viewProfileId: any;
+  editUserDetails: any;
+
   areaIdEdit: any;
   subscriptionIdEdit: any;
   permissionIdEdit: any;
@@ -16,6 +19,11 @@ export class CommonServiceService {
   appVersionIdEdit: any;
 
   currentUserDetail: any;
+  canAdd: any;
+  canEdit: any;
+  canDelete: any;
+  canView: any;
+
   url = environment.apiUrl;
   ngOnInit() { }
 
@@ -83,9 +91,34 @@ export class CommonServiceService {
     return this.http.post(this.url + "v1/user/login", data, httpOptions);
   }
 
+  //get all user deteails
+  getAllUser(token) {
+    return this.http.get(this.url + "v1/user/", this.getTokenAccess(token));
+  }
+
   //get current user deteails
   getCurentUserDetails(token) {
     return this.http.get(this.url + "v1/user/current-user", this.getTokenAccess(token));
+  }
+
+  //get single user deteails
+  getSingleUserDetails(id, token) {
+    return this.http.get(this.url + "v1/user/" + id, this.getTokenAccess(token));
+  }
+
+  //post user detail
+  postUserDetails(body, token) {
+    return this.http.post(this.url + "v1/user/", body, this.getTokenAccess(token));
+  }
+
+  //update user detail
+  updateUserDetails(uId, body, token) {
+    return this.http.patch(this.url + "v1/user/" + uId, body, this.getTokenAccess(token));
+  }
+
+  //delete user details
+  deleteUser(uId, token) {
+    return this.http.delete(this.url + "v1/user/" + uId, this.getTokenAccess(token));
   }
 
   //Change Password
